@@ -18,7 +18,7 @@ class OAuth1Auth(Auth, ClientAuth):
     def auth_flow(self, request: Request) -> typing.Generator[Request, Response, None]:
         url, headers, body = self.prepare(
             request.method, str(request.url), request.headers, request.content)
-        headers['Content-Length'] = str(len(body))
+        headers['Content-Length'] = str(len(request.content))
         yield build_request(url=url, headers=headers, body=body, initial_request=request)
 
 
