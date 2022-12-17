@@ -21,7 +21,8 @@ def build_request(url, headers, body, initial_request: Request) -> Request:
         method=initial_request.method,
         url=url,
         headers=headers,
-        content=body
+        content=body,
+        stream=initial_request.stream,
     )
 
     if hasattr(initial_request, 'extensions'):
