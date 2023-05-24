@@ -43,6 +43,20 @@ class AsyncOAuth1Client(_OAuth1Client, AsyncClient):
             signature_method=signature_method, signature_type=signature_type,
             force_include_body=force_include_body, **kwargs)
 
+    async def fetch_request_token(self, url, **kwargs):
+        """Method for fetching an access token from the token endpoint.
+
+        This is the first step in the OAuth 1 workflow. A request token is
+        obtained by making a signed post request to url. The token is then
+        parsed from the application/x-www-form-urlencoded response and ready
+        to be used to construct an authorization url.
+
+        :param url: Request Token endpoint.
+        :param kwargs: Extra parameters to include for fetching token.
+        :return: A Request Token dict.
+        """
+        return await self._fetch_token(url, **kwargs)
+
     async def fetch_access_token(self, url, verifier=None, **kwargs):
         """Method for fetching an access token from the token endpoint.
 
